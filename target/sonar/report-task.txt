@@ -1,6 +1,0 @@
-projectKey=com.ELPDevOps:ELPDevOps
-serverUrl=http://54.85.35.93:9000
-serverVersion=9.1.0.47736
-dashboardUrl=http://54.85.35.93:9000/dashboard?id=com.ELPDevOps%3AELPDevOps
-ceTaskId=AYmO8mzF5GQU4X9KyOVR
-ceTaskUrl=http://54.85.35.93:9000/api/ce/task?id=AYmO8mzF5GQU4X9KyOVR
