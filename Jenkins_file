@@ -1,6 +1,6 @@
 pipeline {
     agent {
-		label 'Linux-server'
+		label 'linux'
 		}
     tools{
         maven "maven"
@@ -36,8 +36,9 @@ pipeline {
         stage('Deploy to tomcat') {
             steps {
 			 sh "pwd"
-             sh "scp target/*.war root@107.21.70.13:/opt/apache-tomcat-9.0.78/webapps/"
-             sh "ssh root@107.21.70.13 '/opt/apache-tomcat-9.0.78/bin/startup.sh'"
+             sh "scp target/*.war root@44.217.192.242:/opt/tomcat/webapps"
+             sh "ssh root@44.217.192.242 '/opt/tomcat/bin/startup.sh'"
+
         }
     }
 }
