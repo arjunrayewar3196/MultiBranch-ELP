@@ -1,0 +1,49 @@
+pipeline {
+    agent {
+		label 'Linux-server'
+		}
+    tools{
+        maven "maven"
+    }
+    stages {
+        stage('Clone the Repository ') {
+            steps {
+               git branch: 'testing', url: 'https://github.com/ELPDevOps/Tomcat.git'
+            }
+        }
+        stage('Build the maven code') {
+            steps {
+                sh 'mvn clean install'
+           }
+        }
+        stage('Static code analysis') {
+            steps {
+        withSonarQubeEnv('Jenkins-sonar') {
+                    sh  "mvn sonar:sonar"
+                }
+                }
+            }
+        stage('Push the artifacts into Jfrog artifactory') {
+            steps {
+              rtUpload (
+                serverId: 'Artifactory-jenkins',
+                spec: '''{
+                      "files": [
+                        {
+                          "pattern": "*.war",
+                           "target": "Devops/"
+                        }
+                    ]
+                }'''
+              )
+          }
+        }
+        stage('Deploy to tomcat') {
+            steps {
+			 sh "pwd"
+             sh "scp target/*.war root@107.21.70.13:/opt/apache-tomcat-9.0.78/webapps/"
+             sh "ssh root@107.21.70.13 '/opt/apache-tomcat-9.0.78/bin/startup.sh'"
+        }
+    }
+}
+}
