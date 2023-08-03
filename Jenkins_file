@@ -41,8 +41,8 @@ pipeline {
         stage('Deploy to tomcat') {
             steps {
 			 sh "pwd"
-             sh "scp target/*.war root@54.173.153.129:/opt/apache-tomcat-9.0.78/webapps/"
-             sh "ssh root@54.173.153.129 '/opt/apache-tomcat-9.0.78/bin/startup.sh'"
+             sh "scp target/*.war root@107.21.70.13:/opt/apache-tomcat-9.0.78/webapps/"
+             sh "ssh root@107.21.70.13 '/opt/apache-tomcat-9.0.78/bin/startup.sh'"
         }
     }
 }
