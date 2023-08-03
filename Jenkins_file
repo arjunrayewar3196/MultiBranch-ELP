@@ -6,11 +6,6 @@ pipeline {
         maven "maven"
     }
     stages {
-        stage('Clone the Repository ') {
-            steps {
-               git branch: 'testing', url: 'https://github.com/ELPDevOps/Tomcat.git'
-            }
-        }
         stage('Build the maven code') {
             steps {
                 sh 'mvn clean install'
